@@ -4,7 +4,7 @@ import asyncio
 import random
 
 
-async def wait_random(max_delay=10):
+async def wait_random(max_delay: int = 10) -> float:
     """function that receives a integer argument used to generate
     a random number
     returns the generated random number after sleeping

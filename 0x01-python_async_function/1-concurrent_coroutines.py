@@ -16,7 +16,7 @@ async def wait_n(n: int, max_delay: int) -> List[float]:
     return delays_list
 
 
-def quick_sort(target_list, low: Any, high: Any) -> list:
+def quick_sort(target_list, low: Any, high: Any) -> None:
     """using the quicksort algorithm to sort a list"""
     if low < high:
         pi = partition(target_list, low, high)

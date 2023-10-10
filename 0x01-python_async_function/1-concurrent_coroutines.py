@@ -1,19 +1,20 @@
 #!/usr/bin/env python3
 """module with multiple concurrent coroutines"""
 from typing import Any, List
-
+import asyncio
 
 wait_random = __import__("0-basic_async_syntax").wait_random
 
 
 async def wait_n(n: int, max_delay: int) -> List[float]:
     """coroutine function that executes another coroutine"""
-    delays_list = []
-    for i in range(0, n):
-        value = await wait_random(max_delay)
-        delays_list.append(value)
-    quick_sort(delays_list, 0, len(delays_list) - 1)
-    return delays_list
+    future_values = []
+    for _ in range(0, n):
+        future_values.append(wait_random(max_delay))
+    # quick_sort(delays_list, 0, len(delays_list) - 1)
+    future_values = asyncio.as_completed(future_values)
+    delays_values = [await future for future in future_values]
+    return delays_values
 
 
 def quick_sort(target_list, low: Any, high: Any) -> None:
